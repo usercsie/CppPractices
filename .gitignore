@@ -1,0 +1,17 @@
+
+*.db-wal
+*.ipch
+*.db-shm
+*.obj
+*.pch
+*.pdb
+*.log
+*.db
+*.opendb
+*.tlog
+*.idb
+*.lib
+*.user
+*.exe
+*.ilk
+.vs/

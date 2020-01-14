@@ -23,7 +23,7 @@ public:
 	}
 
 	void notify()
-	{
+	{		
 		for (auto it : _Observers)
 		{
 			if (it != nullptr)

@@ -32,81 +32,105 @@ public:
 	}
 };
 
-class EventArgs
+typedef void* Address;
+typedef std::function<void(Address)> EnevtHandler;
+
+class Publisher
 {
 public:
-	~EventArgs()
+	~Publisher()
 	{
-		std::cout << "EventArgs was disposed." << std::endl;
-	}
-	int Param1;
-	int Param2;
-};
-
-class PublisherLamda
-{
-public:
-	~PublisherLamda()
-	{
-		std::cout << "PublisherLamda was disposed." << std::endl;
-	}
-
-	std::function<void(std::shared_ptr<EventArgs>)> Callback;
+		std::cout << "Publisher was disposed." << std::endl;
+	}	
 
 	void Action()
-	{		
+	{
 		OnActionCallback();
 	};
 
+	void Register(Address adr, EnevtHandler e)
+	{
+		_ObserverPtr = adr;
+		Callback = e;
+	}
 private:
+	EnevtHandler Callback;
+	Address _ObserverPtr;
 	void OnActionCallback()
 	{
 		if (Callback != nullptr)
-		{
-			std::shared_ptr<EventArgs> ptr = std::make_shared<EventArgs>();
-			ptr->Param1 = 1;
-			ptr->Param2 = 2;
-			Callback(ptr);
+		{				
+			Callback(_ObserverPtr);
 		}
 	}
 };
+
+class ObserverStatic
+{
+public:
+	bool GotCallBack = false;
+
+	~ObserverStatic()
+	{
+		std::cout << "ObserverStatic was disposed." << std::endl;
+	}
+
+	static void Callback(Address ptr)
+	{
+		reference_to<ObserverStatic>(ptr).OnCallback();
+	}
+private:
+
+	void OnCallback()
+	{
+		GotCallBack = true;
+	}
+
+	template<class W>
+	static W& reference_to(Address pw)
+	{
+		return *static_cast<W*>(pw);
+	}
+};
+
+TEST(CallbackFuncTest, StaticCallback)
+{	
+	ObserverStatic * ob = new ObserverStatic();
+	std::shared_ptr<Publisher> spb = std::make_shared< Publisher>();
+	std::shared_ptr<ObserverStatic> sob(ob);
+	spb->Register(ob, ObserverStatic::Callback);
+
+	spb->Action();
+
+	EXPECT_EQ(true, sob->GotCallBack);
+}
 
 class ObserverLamda
 {
 public:
 	bool GotCallBack = false;
-	int GotValue;
-	int GotValueFromHandler;
-	std::shared_ptr<EventArgs> Args;	
-	std::shared_ptr<PublisherLamda> _Inst;
+
+	ObserverLamda(std::shared_ptr< Publisher> publisher)
+	{
+		publisher->Register(this, [&](Address)
+		{
+			GotCallBack = true;
+		});
+	}
 
 	~ObserverLamda()
 	{
 		std::cout << "ObserverLamda was disposed." << std::endl;
 	}
-
-	ObserverLamda(std::shared_ptr<PublisherLamda> publisher)
-	{
-		_Inst = publisher;
-		_Inst->Callback = [&](std::shared_ptr<EventArgs> args)
-		{						
-			Args = args;			
-		};					
-	}
-
-	void Action()
-	{
-		_Inst->Action();
-	}	
 };
 
-TEST(CallbackFuncTest, Callback_Raised)
+TEST(CallbackFuncTest, LamdaCallback)
 {
-	std::shared_ptr<PublisherLamda> publisher = std::make_shared<PublisherLamda>();
-	std::unique_ptr<ObserverLamda> inst = std::make_unique<ObserverLamda>(publisher);	
-	
-	inst->Action();
-	
-	EXPECT_EQ(1, inst->Args->Param1);
-	EXPECT_EQ(2, inst->Args->Param2);	
+	std::shared_ptr<Publisher> spb = std::make_shared< Publisher>();
+	ObserverLamda * ob = new ObserverLamda(spb);
+	std::shared_ptr<ObserverLamda> sob(ob);	
+
+	spb->Action();
+
+	EXPECT_EQ(true, sob->GotCallBack);
 }

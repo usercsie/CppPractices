@@ -6,7 +6,7 @@
 
 int main(int argc, char **argv)
 {	
-	::testing::FLAGS_gtest_filter = "ObserverPatternImprovedTest.*";
+	::testing::FLAGS_gtest_filter = "CallbackFuncTest.*";
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS(); 
 }
