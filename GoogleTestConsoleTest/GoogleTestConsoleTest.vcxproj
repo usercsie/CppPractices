@@ -156,12 +156,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CallbackTest.cpp" />
+    <ClCompile Include="FileOperTest.cpp" />
+    <ClCompile Include="FileTest.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ObserverPatternImprovedTest.cpp" />
     <ClCompile Include="ObserverPatternTest.cpp" />
     <ClCompile Include="SharedPointerTest.cpp" />
+    <ClCompile Include="StringTest.cpp" />
     <ClCompile Include="TemplateTest.cpp" />
     <ClCompile Include="VectorTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DirectoryOper.h" />
+    <ClInclude Include="FileOper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

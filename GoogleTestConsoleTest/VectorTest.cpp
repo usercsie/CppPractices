@@ -17,3 +17,4 @@ TEST(VectorTest, stringToByteArray)
 		EXPECT_EQ(start++, v);
 	}
 }
+
