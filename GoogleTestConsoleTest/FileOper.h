@@ -20,6 +20,16 @@ namespace XYZCore
 				return false;
 		}
 
+		static bool CreateFile(std::wstring fileName)
+		{
+			std::ofstream fs(fileName, std::ios::app);
+
+			if (fs)
+				return true;
+			else
+				return false;
+		}
+
 		static int DeleteFile(std::string fileName)
 		{
 			return std::remove(fileName.c_str());
@@ -30,7 +40,7 @@ namespace XYZCore
 			return _wremove(fileName.c_str());
 		}
 
-		static void WriteAllBytes(std::string fileName, const char* data, int size)
+		static void WriteAllBytes(std::string fileName, const char* data, size_t size)
 		{
 			std::ofstream fs;
 			fs.open(fileName.c_str(), std::ios_base::binary);

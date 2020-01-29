@@ -12,6 +12,17 @@ TEST(FileOperTest, CreateFile)
 	XYZCore::FileOper::DeleteFile(fileName);
 }
 
+TEST(FileOperTest, CreateFile_UniCode)
+{
+	std::wstring fileName = L".\\TestData\\NewFile¤¤¤å.txt";
+	bool actual = XYZCore::FileOper::CreateFile(fileName);
+
+	EXPECT_EQ(true, actual);
+	EXPECT_EQ(true, XYZCore::FileOper::FileExisted(fileName));
+
+	XYZCore::FileOper::DeleteFile(fileName);
+}
+
 TEST(FileOperTest, FileExistNotFound)
 {
 	bool actual = XYZCore::FileOper::FileExisted("D:\\ab.txt");
