@@ -48,12 +48,21 @@
     <ClCompile Include="DirectoryOperTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ResinParameterParserTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StringOper.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileOper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DirectoryOper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResinParameterParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

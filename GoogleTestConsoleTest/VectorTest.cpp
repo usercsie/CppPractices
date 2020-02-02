@@ -1,6 +1,6 @@
 #include <iostream>
 #include "gtest/gtest.h"
-
+#include "StringOper.h"
 
 TEST(VectorTest, stringToByteArray)
 {
@@ -18,3 +18,27 @@ TEST(VectorTest, stringToByteArray)
 	}
 }
 
+TEST(VectorTest, RemoveCommentsOrEmptyLines)
+{
+	std::vector<std::string> expect
+	{
+		"abcd",
+		"aaaaa",		
+	};
+	std::vector<std::string> lines
+	{
+		"abcd",
+		";aaaa",
+		"aaaaa",
+		"",
+		"   ",
+		"\n"
+	};
+
+	lines.erase(std::remove_if(lines.begin(), lines.end(), [](std::string const &i)
+	{
+		return XYZCore::StringOper::IsEmptyOrSpace(i) || i.front() == ';';
+	}), lines.end());
+
+	EXPECT_EQ(expect, lines);
+}
