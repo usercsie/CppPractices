@@ -1,6 +1,7 @@
 #include <iostream>
 #include "gtest/gtest.h"
 #include "StringOper.h"
+#include "VectorOper.h"
 
 TEST(VectorTest, stringToByteArray)
 {
@@ -43,6 +44,53 @@ TEST(VectorTest, RemoveCommentsOrEmptyLines)
 	EXPECT_EQ(expect, lines);
 }
 
+TEST(VectorTest, FindString_Found)
+{
+	int expect = 2;
+	std::vector<std::string> elements
+	{
+		"abcd",
+		"aaaaa",
+		"bb",
+		"dd"
+	};
+
+	int actual = XYZCore::VectorOper::FindString(elements, "bb");
+
+	EXPECT_EQ(expect, actual);
+}
+
+TEST(VectorTest, FindString_NotFound)
+{
+	int expect = -1;
+	std::vector<std::string> elements
+	{
+		"abcd",
+		"aaaaa",
+		"bb",
+		"dd"
+	};
+
+	int actual = XYZCore::VectorOper::FindString(elements, "cc");
+
+	EXPECT_EQ(expect, actual);
+}
+
+TEST(VectorTest, Data)
+{
+	std::vector<int> elements
+	{
+		1,
+		2,
+		3,
+		4
+	};
+
+	int* d = elements.data();
+	d[0] = 100;
+
+	EXPECT_EQ(100, elements[0]);
+}
 std::vector<int> GlobalTable{ 1,2,3,4 };
 void GetTablePtr(int*& ptr)
 {

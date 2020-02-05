@@ -71,5 +71,8 @@
     <ClInclude Include="PathOper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VectorOper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

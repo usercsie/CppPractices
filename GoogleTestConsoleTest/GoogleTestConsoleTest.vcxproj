@@ -176,6 +176,7 @@
     <ClInclude Include="FileOper.h" />
     <ClInclude Include="PathOper.h" />
     <ClInclude Include="ResinParameterParser.h" />
+    <ClInclude Include="VectorOper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
