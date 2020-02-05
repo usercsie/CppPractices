@@ -91,3 +91,25 @@ TEST(VectorTest, Data)
 
 	EXPECT_EQ(100, elements[0]);
 }
+std::vector<int> GlobalTable{ 1,2,3,4 };
+void GetTablePtr(int*& ptr)
+{
+	ptr = GlobalTable.data();
+}
+int* ReturnTablePtr()
+{
+	return GlobalTable.data();
+}
+TEST(VectorTest, ReturnFromFunc)
+{
+	int* ptr = nullptr;
+	GetTablePtr(ptr);
+	ptr[0] = 10;
+
+	EXPECT_EQ(10, GlobalTable[0]);
+
+	ptr = nullptr;
+	ptr = ReturnTablePtr();
+	ptr[0] = 5;
+	EXPECT_EQ(5, GlobalTable[0]);
+}
