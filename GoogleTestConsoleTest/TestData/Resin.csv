@@ -3,15 +3,32 @@ Resin parameter for Nobel
 ;The table is for resins of Partpro120 only.																																						
 																																						
 																																						
-SlicingJudgeLevelTable																																						
-;Number of level																																						
-4																																						
+SlicingJudgeLevelTable			
+;Number of power table set
+3																																			
+;Number of level,Version,MaterialType,LayerHeight,Quality
+4,M1,L_BLACK,0.1,QUALITY_STANDARD																																						
 ;Max width,Max single are,Max total area,Max distance																																			
 5,90,180,0																																			
 8,200,400,0																																			
 10,350,700,0																																			
 0,0,0,0																																			
-																																						
+;Number of level,Version,MaterialType,LayerHeight,Quality
+4,M1,L_BLACK,0.05,QUALITY_STANDARD																																						
+;Max width,Max single are,Max total area,Max distance																																			
+5,90,180,0																																			
+8,200,400,0																																			
+10,350,700,0																																			
+0,0,0,0																																			
+;Number of level,Version,MaterialType,LayerHeight,Quality
+4,M2,L_BLACK_M2,0.1,QUALITY_STANDARD																																						
+;Max width,Max single are,Max total area,Max distance																																			
+5,90,180,0																																			
+8,200,400,0																																			
+10,350,700,0																																			
+0,0,0,0																																			
+
+																																																																												
 ;Version																																						
 ;A1,A2,B1,C1,D1,D2,D3,D4,E1,E2,F1,F2,G1,G2,G3,K1,M1,M2,P1,P2,P3,MODEL,SUGICAL,CAD,TRAY,SPLINT,SPLINTE,TEMP,TEMPA2										
 ;MaterialType																																						
@@ -20,7 +37,9 @@ SlicingJudgeLevelTable
 ;Quality																																						
 ;QUALITY_STANDARD,QUALITY_FINE,QUALITY_SUPERFINE																																				
 																																						
-PowerTable																																						
+PowerTable
+;number of table
+12																																					
 ;Version,MaterialType,LayerHeight,Quality,Level,TalbeSize,CB,CL,NLNum,NLNum for middle,FCT,FUS,FUD,FUW,FUS1,FUD1,FUW1,FDS,FDD,FDW,FPV,FDLOFF,CT,US,UD,UW,US1,UD1,UW1,DS,DD,DW,PV,DLOFF,RT,BRGB1,BRGB2,TRGB1,TRGB2 
 M1,L_BLACK,0.1,QUALITY_STANDARD,0,33,0,37,4,26,3000,1,10,0,6,10,0,6,0,3000,95,0,1300,4,5,0,6,10,0,6,0,2000,75,300,0,7,7,7,7
 M1,L_BLACK,0.1,QUALITY_STANDARD,1,33,0,37,4,26,3000,1,10,0,6,10,0,6,0,3000,95,0,1300,4,5,0,6,10,0,6,0,2000,75,300,0,7,7,7,7

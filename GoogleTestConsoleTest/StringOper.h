@@ -2,6 +2,7 @@
 #include <string>
 #include <algorithm> 
 #include <cctype>
+#include <vector>
 
 namespace XYZCore
 {
@@ -27,10 +28,28 @@ namespace XYZCore
 			TrimStart(s);
 			TrimEnd(s);
 		}
-
 		static void TrimAll(std::string &s)
 		{
 			s.erase(remove_if(s.begin(), s.end(), isspace), s.end());
+		}
+
+		static std::vector<std::string> Split(std::string s, std::string delimiter)
+		{
+			std::vector<std::string> tokens;
+
+			size_t pos = 0;
+			std::string token;
+			while ((pos = s.find(delimiter)) != std::string::npos) 
+			{
+				token = s.substr(0, pos);				
+				tokens.push_back(token);
+				s.erase(0, pos + delimiter.length());
+			}
+			if (tokens.size() > 0 && s.length() > 0)
+			{
+				tokens.push_back(s.substr(0, s.length()));
+			}
+			return tokens;
 		}
 
 		static bool IsEmptyOrSpace(std::string s)
@@ -45,6 +64,19 @@ namespace XYZCore
 	//		std::string::iterator end_pos = std::remove(s.begin(), s.end(), ' ');
 	//		s.erase(end_pos, s.end());
 			s.erase(std::remove(s.begin(), s.end(), c), s.end());
+		}
+
+		static void CutEnd(std::string &s, char c)
+		{
+			for (auto i = s.rbegin(); i != s.rend(); ++i)
+			{
+				if (*i == c)
+				{
+					s.pop_back();
+				}
+				else
+					break;
+			}
 		}
 	};	
 }

@@ -101,3 +101,61 @@ TEST(StringTest, StringIsSpace_Return_False)
 
 	EXPECT_EQ(expect, actual);
 }
+
+TEST(StringTest, Split)
+{
+	std::vector<std::string> expect
+	{
+		"",
+		"abc",
+		"def",
+		"ghi",
+		"jkl"
+	};
+	std::string str = ",abc,def,ghi,jkl";
+
+	std::vector<std::string> actual = XYZCore::StringOper::Split(str, ",");
+
+	EXPECT_EQ(expect, actual);
+}
+
+TEST(StringTest, Split_NotFound)
+{
+	std::vector<std::string> expect;
+
+	std::string str = ",abc,def,ghi,jkl";
+
+	std::vector<std::string> actual = XYZCore::StringOper::Split(str, ".");
+
+	EXPECT_EQ(expect, actual);
+}
+
+TEST(StringTest, CutEnd)
+{
+	std::string expect = "0.1";
+	std::string s = "0.1000000";
+
+	XYZCore::StringOper::CutEnd(s, '0');
+
+	EXPECT_EQ(expect, s);
+}
+
+TEST(StringTest, CutEnd_All)
+{
+	std::string expect = "";
+	std::string s = "0000000";
+
+	XYZCore::StringOper::CutEnd(s, '0');
+
+	EXPECT_EQ(expect, s);
+}
+
+TEST(StringTest, CutEnd_Nothing)
+{
+	std::string expect = "0000000.1";
+	std::string s = "0000000.1";
+
+	XYZCore::StringOper::CutEnd(s, '0');
+
+	EXPECT_EQ(expect, s);
+}
