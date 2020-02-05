@@ -54,6 +54,9 @@
     <ClCompile Include="StringOper.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="PathOperTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileOper.h">
@@ -63,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ResinParameterParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PathOper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
