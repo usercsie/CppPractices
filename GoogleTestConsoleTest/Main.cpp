@@ -5,8 +5,43 @@
 #include "gtest/gtest.h"
 
 
+#include <string>
+#include "ConcurrentWrapper.h"
+#include <vector>
+#include <future>
+
 int main(int argc, char **argv)
 {		
+	XYZCore::ConcurrentWrapper<std::string> cs{ "Start\n" };
+
+	std::vector<std::future<void>> v;
+
+	for (int i = 0; i < 5; ++i)
+	{
+		v.push_back(std::async
+			(
+				std::launch::async,
+				[&, i] 
+				{
+					cs([&i](std::string& s) 
+					{
+						s += std::to_string(i) + std::to_string(i) + std::to_string(i);
+						s += "\n";
+					});
+					cs([](const std::string& s) 
+					{ 
+						std::cout << s; 
+					});
+				}
+			)
+		);
+	}
+
+	//for (auto& fut : v) 
+	//	fut.wait();
+	std::cout << "Done\n";
+
+
 	::testing::FLAGS_gtest_filter = "ConcurrentQueue.*";
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS(); 

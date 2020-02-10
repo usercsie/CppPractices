@@ -173,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConcurrentQueue.h" />
+    <ClInclude Include="ConcurrentWrapper.h" />
     <ClInclude Include="DirectoryOper.h" />
     <ClInclude Include="FileOper.h" />
     <ClInclude Include="PathOper.h" />
