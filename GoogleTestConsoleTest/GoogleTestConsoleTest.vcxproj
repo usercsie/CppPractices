@@ -157,6 +157,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CallbackTest.cpp" />
+    <ClCompile Include="ConcurrentQueueTest.cpp" />
     <ClCompile Include="DirectoryOperTest.cpp" />
     <ClCompile Include="FileOperTest.cpp" />
     <ClCompile Include="FileTest.cpp" />
@@ -164,7 +165,6 @@
     <ClCompile Include="ObserverPatternImprovedTest.cpp" />
     <ClCompile Include="ObserverPatternTest.cpp" />
     <ClCompile Include="PathOperTest.cpp" />
-    <ClCompile Include="ResinParameterParserTest.cpp" />
     <ClCompile Include="SharedPointerTest.cpp" />
     <ClCompile Include="StringOper.h" />
     <ClCompile Include="StringTest.cpp" />
@@ -172,10 +172,10 @@
     <ClCompile Include="VectorTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConcurrentQueue.h" />
     <ClInclude Include="DirectoryOper.h" />
     <ClInclude Include="FileOper.h" />
     <ClInclude Include="PathOper.h" />
-    <ClInclude Include="ResinParameterParser.h" />
     <ClInclude Include="VectorOper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -11,7 +11,7 @@ namespace XYZCore
 	{
 	public:
 		static bool Create(std::string path)
-		{			
+		{
 			//std::filesystem::path tmp(path);
 
 			//if (Exists(tmp) == true)
@@ -46,7 +46,7 @@ namespace XYZCore
 				return false;
 			}
 		}
-		
+
 		static bool Exists(std::string path)
 		{
 			//std::filesystem::path tmp(path);
@@ -75,9 +75,9 @@ namespace XYZCore
 
 			return false;    // this is not a directory!
 		}
-		
+
 		static bool Delete(std::string path)
-		{		
+		{
 			return RemoveDirectoryA(path.c_str());
 		}
 		static bool Delete(std::wstring path)
@@ -85,16 +85,13 @@ namespace XYZCore
 			return RemoveDirectoryW(path.c_str());
 		}
 
-/*		static std::vector<std::string> GetFiles(std::string path)
-		{
-			std::filesystem::path str(path);
+		/*		static std::vector<std::string> GetFiles(std::string path)
+				{
+					std::filesystem::path str(path);
+				}
 
-
-		}
-
-		static std::vector<std::string> GetFiles(std::string path, std::string searchPattern)
-		{
-			
-		}	*/	
+				static std::vector<std::string> GetFiles(std::string path, std::string searchPattern)
+				{
+				}	*/
 	};
 };

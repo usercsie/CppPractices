@@ -58,7 +58,7 @@ namespace XYZCore
 		{
 			std::ofstream fs;
 			fs.open(fileName.c_str());
-			
+
 			if (fs)
 			{
 				for (auto line : content)
@@ -104,9 +104,9 @@ namespace XYZCore
 
 			std::vector<std::string> lines;
 
-			if (ifs) 
+			if (ifs)
 			{
-				for (std::string line; std::getline(ifs, line); /**/) 
+				for (std::string line; std::getline(ifs, line); /**/)
 				{
 					lines.push_back(line);
 				}
