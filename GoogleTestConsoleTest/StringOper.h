@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <algorithm> 
+#include <algorithm>
 #include <cctype>
 #include <vector>
 
@@ -9,21 +9,21 @@ namespace XYZCore
 	class StringOper
 	{
 	public:
-		static void TrimStart(std::string &s) 
+		static void TrimStart(std::string &s)
 		{
-			s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int ch) 
+			s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int ch)
 			{
 				return !std::isspace(ch);
 			}));
 		}
-		static void TrimEnd(std::string &s) 
+		static void TrimEnd(std::string &s)
 		{
-			s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) 
+			s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch)
 			{
 				return !std::isspace(ch);
 			}).base(), s.end());
 		}
-		static void Trim(std::string &s) 
+		static void Trim(std::string &s)
 		{
 			TrimStart(s);
 			TrimEnd(s);
@@ -39,9 +39,9 @@ namespace XYZCore
 
 			size_t pos = 0;
 			std::string token;
-			while ((pos = s.find(delimiter)) != std::string::npos) 
+			while ((pos = s.find(delimiter)) != std::string::npos)
 			{
-				token = s.substr(0, pos);				
+				token = s.substr(0, pos);
 				tokens.push_back(token);
 				s.erase(0, pos + delimiter.length());
 			}
@@ -61,8 +61,8 @@ namespace XYZCore
 
 		static void EraseAll(std::string &s, char c)
 		{
-	//		std::string::iterator end_pos = std::remove(s.begin(), s.end(), ' ');
-	//		s.erase(end_pos, s.end());
+			//		std::string::iterator end_pos = std::remove(s.begin(), s.end(), ' ');
+			//		s.erase(end_pos, s.end());
 			s.erase(std::remove(s.begin(), s.end(), c), s.end());
 		}
 
@@ -78,5 +78,5 @@ namespace XYZCore
 					break;
 			}
 		}
-	};	
+	};
 }

@@ -4,9 +4,10 @@
 #include <iostream>
 #include "gtest/gtest.h"
 
+
 int main(int argc, char **argv)
-{	
-	::testing::FLAGS_gtest_filter = "PathOperTest.*";
+{		
+	::testing::FLAGS_gtest_filter = "ConcurrentQueue.*";
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS(); 
 }

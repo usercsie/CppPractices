@@ -48,13 +48,13 @@
     <ClCompile Include="DirectoryOperTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ResinParameterParserTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StringOper.h">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="PathOperTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConcurrentQueueTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,13 +65,13 @@
     <ClInclude Include="DirectoryOper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ResinParameterParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PathOper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VectorOper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConcurrentQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
