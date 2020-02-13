@@ -48,6 +48,13 @@ namespace XYZCore
 			mlock.unlock();
 			cond_.notify_one();
 		}
+
+		int count()
+		{
+			std::lock_guard<std::mutex> guard(mutex_);
+			return queue_.size();
+		}
+
 		ConcurrentQueue() = default;
 		ConcurrentQueue(const ConcurrentQueue&) = delete;            // disable copying
 		ConcurrentQueue& operator=(const ConcurrentQueue&) = delete; // disable assignment
@@ -56,5 +63,6 @@ namespace XYZCore
 		std::queue<T> queue_;
 		std::mutex mutex_;
 		std::condition_variable cond_;
+		const int popTimeout_ = 1;
 	};
 }

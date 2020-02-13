@@ -48,10 +48,10 @@ namespace XYZCore
 			resource_{ resource },
 			done_{ false }
 		{
-			worker_ = std::thread([this]
+			worker_ = std::thread([this] 
 			{
 				while (!done_)
-				{
+				{					
 					queue_.pop()();
 				}
 			});
@@ -66,15 +66,14 @@ namespace XYZCore
 		template <typename F>
 		void operator()(F f) const
 		{
-			queue_.push([=] {f(resource_); });
+			queue_.push([=] {f(resource_); });			
 		}
 
 	private:
 
-		mutable ConcurrentQueue <std::function<void()>> queue_;
+		mutable ConcurrentQueue<std::function<void()>> queue_;
 		mutable T resource_;
 		std::thread worker_;
 		bool done_;
-
 	};
 }

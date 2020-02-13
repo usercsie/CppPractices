@@ -6,17 +6,17 @@ TEST(SharedPointerTest, MakePointer)
 	std::shared_ptr<int> p1 = std::make_shared<int>(100);
 	std::shared_ptr<int> p2(new int(1000));
 	int* temp = new int(10000);
-	std::shared_ptr<int> p3(temp);	
+	std::shared_ptr<int> p3(temp);		
 
 	EXPECT_EQ(100, *p1);	
 	EXPECT_EQ(1000, *p2);
-	EXPECT_EQ(10000, *p3);	
+	EXPECT_EQ(10000, *p3);		
 }
 
 TEST(SharedPointerTest, UseCount)
 {
 	std::shared_ptr<int> p1 = std::make_shared<int>(100);
-
+	
 	EXPECT_EQ(1, p1.use_count());
 
 	std::shared_ptr<int> p2 = p1;
