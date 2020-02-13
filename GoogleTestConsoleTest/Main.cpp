@@ -6,7 +6,7 @@
 
 
 #include <string>
-#include "ConcurrentWrapper.h"
+//#include "ConcurrentWrapper.h"
 #include <vector>
 #include <future>
 #include <cctype>
@@ -150,7 +150,7 @@
 
 int main(int argc, char **argv)
 {	
-	::testing::FLAGS_gtest_filter = "AsyncQueueThreads.*";
+	::testing::FLAGS_gtest_filter = "AsyncQueueThreads.Wait_Success_4Threads";
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
 }

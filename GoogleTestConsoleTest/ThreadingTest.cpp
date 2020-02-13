@@ -187,10 +187,10 @@ namespace Threading_Lock
 		{
 			std::this_thread::sleep_for(std::chrono::seconds(1));
 			i = 1;
-			//cv.notify_one();
+			cv.notify_one();
 		}).detach();
 		
-		bool flag = cv.wait_for(lk, std::chrono::seconds(5), [&]() {return i == 1; });
+		bool flag = cv.wait_for(lk, std::chrono::seconds(10), [&]() {return i == 1; });
 		EXPECT_EQ(true, flag);
 		EXPECT_EQ(1, i);
 	}

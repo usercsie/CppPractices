@@ -2,6 +2,7 @@
 
 #include <functional>
 #include <thread>
+#include <future>
 #include "ConcurrentQueue.h"
 
 namespace XYZCore
@@ -18,15 +19,15 @@ namespace XYZCore
 			done_{ false }
 		{
 			for (int n = 0; n < threadNum; n++)
-			{
+			{				
 				worker_.push_back
 				(
-					std::thread([this]()
+					std::thread([this, n]()
 					{
 						while (!done_)
-						{
-							queue_.pop()();
-							std::cout << "pop." << std::this_thread::get_id() << "===>" << done_ << std::endl;
+						{											
+							queue_.pop()();							
+							//std::cout << "pop." << std::this_thread::get_id() << "===>" << done_ << std::endl;
 						}
 					})
 				);
@@ -62,7 +63,8 @@ namespace XYZCore
 			queue_.push([=]
 			{
 				f(resource_);
-				token_.push(token);
+				token_.push(token);				
+				cv_getToken_.notify_one();
 			});
 		}
 
@@ -70,24 +72,45 @@ namespace XYZCore
 		int GetToken(int timeOut = 5000)
 		{
 			std::unique_lock<std::mutex> lk(cv_mutex_);
-
+			
+			int duration = 0;
 			while (token_.count() == 0)
 			{
-				if (cv_.wait_for(lk, std::chrono::milliseconds(timeOut), [this] {return token_.count() > 0; }) == false)
-					return -1;
+				if (cv_getToken_.wait_for(lk, std::chrono::milliseconds(1000), [this] {return token_.count() > 0; }) == false)
+				{
+					duration += 1000;
+					if (duration > timeOut)
+						return -1;
+				}
 			}
 
 			return token_.pop();
 		}
 
-		bool Wait(int timeOut = 5000)
+		bool Wait(int timeOut = 60000)
 		{
-			std::unique_lock<std::mutex> lk(cv_mutex_);
+			std::unique_lock<std::mutex> lk(cv_mutex_2);
 
+			int duration = 0;
 			while (queue_.count() > 0)
+			{						
+				if (cv_wait_.wait_for(lk, std::chrono::milliseconds(1000), [this] {return queue_.count() == 0; }) == false)				
+				{
+					duration += 1000;
+					if (duration > timeOut)
+						return false;
+				}					
+			}
+
+			for (int n = 0; n < worker_.size(); n++)
 			{
-				if (cv_.wait_for(lk, std::chrono::milliseconds(timeOut), [this] {return queue_.count() == 0; }) == false)
-					return false;
+				queue_.push([this] {done_ = true; });
+			}
+
+			for (auto& w : worker_)
+			{
+				w.join();
+				std::cout << "Thread terminated." << std::endl;
 			}
 
 			return true;
@@ -98,10 +121,13 @@ namespace XYZCore
 		mutable ConcurrentQueue<Action> queue_;
 		mutable ConcurrentQueue<int> token_;
 		mutable T resource_;
-		std::vector<std::thread> worker_;
+		std::vector<std::thread> worker_;	
+
 		bool done_;
 
-		std::mutex cv_mutex_;
-		std::condition_variable cv_;
+		std::mutex cv_mutex_;		
+		std::mutex cv_mutex_2;
+		mutable std::condition_variable cv_getToken_;
+		mutable std::condition_variable cv_wait_;
 	};
 }

@@ -157,12 +157,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AsyncQueueThreadsTest.cpp" />
-    <ClCompile Include="AsyncQueueThreadTest.cpp" />
     <ClCompile Include="CallbackTest.cpp" />
     <ClCompile Include="ConcurrentQueueTest.cpp" />
     <ClCompile Include="ConcurrentTest.cpp" />
-    <ClCompile Include="ConcurrentThreadsTest.cpp" />
-    <ClCompile Include="ConcurrentWrapperTest.cpp" />
     <ClCompile Include="DirectoryOperTest.cpp" />
     <ClCompile Include="FileOperTest.cpp" />
     <ClCompile Include="FileTest.cpp" />
@@ -178,12 +175,9 @@
     <ClCompile Include="VectorTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AsyncQueueThread.h" />
     <ClInclude Include="AsyncQueueThreads.h" />
     <ClInclude Include="Concurrent.h" />
     <ClInclude Include="ConcurrentQueue.h" />
-    <ClInclude Include="ConcurrentThreads.h" />
-    <ClInclude Include="ConcurrentWrapper.h" />
     <ClInclude Include="DirectoryOper.h" />
     <ClInclude Include="FileOper.h" />
     <ClInclude Include="PathOper.h" />
