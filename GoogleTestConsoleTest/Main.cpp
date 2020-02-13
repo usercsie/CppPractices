@@ -150,7 +150,7 @@
 
 int main(int argc, char **argv)
 {	
-	::testing::FLAGS_gtest_filter = "AsyncQueueThreads.Wait_Success_4Threads";
+	::testing::FLAGS_gtest_filter = "AsyncQueueThreads.GetToken_TimeOut";
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
 }

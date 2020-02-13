@@ -43,8 +43,11 @@ namespace XYZCore
 			
 			for (auto& w : worker_)
 			{
-				w.join();
-				std::cout << "Thread terminated." << std::endl;
+				if (w.joinable() == true)
+				{
+					w.join();
+					std::cout << "Thread terminated." << std::endl;
+				}
 			}			
 		}
 
@@ -76,9 +79,9 @@ namespace XYZCore
 			int duration = 0;
 			while (token_.count() == 0)
 			{
-				if (cv_getToken_.wait_for(lk, std::chrono::milliseconds(1000), [this] {return token_.count() > 0; }) == false)
+				if (cv_getToken_.wait_for(lk, std::chrono::milliseconds(500), [this] {return token_.count() > 0; }) == false)
 				{
-					duration += 1000;
+					duration += 500;
 					if (duration > timeOut)
 						return -1;
 				}
@@ -89,12 +92,14 @@ namespace XYZCore
 
 		bool Wait(int timeOut = 60000)
 		{
-			std::unique_lock<std::mutex> lk(cv_mutex_2);
+			std::mutex mtx;
+			std::unique_lock<std::mutex> lk(mtx);
+			std::condition_variable cv;
 
 			int duration = 0;
 			while (queue_.count() > 0)
 			{						
-				if (cv_wait_.wait_for(lk, std::chrono::milliseconds(1000), [this] {return queue_.count() == 0; }) == false)				
+				if (cv.wait_for(lk, std::chrono::milliseconds(1000), [this] {return queue_.count() == 0; }) == false)
 				{
 					duration += 1000;
 					if (duration > timeOut)
@@ -102,6 +107,7 @@ namespace XYZCore
 				}					
 			}
 
+			//想不出其它方法, 只能先用Join的方式來判斷是否結束
 			for (int n = 0; n < worker_.size(); n++)
 			{
 				queue_.push([this] {done_ = true; });
@@ -109,8 +115,7 @@ namespace XYZCore
 
 			for (auto& w : worker_)
 			{
-				w.join();
-				std::cout << "Thread terminated." << std::endl;
+				w.join();				
 			}
 
 			return true;
@@ -125,9 +130,7 @@ namespace XYZCore
 
 		bool done_;
 
-		std::mutex cv_mutex_;		
-		std::mutex cv_mutex_2;
-		mutable std::condition_variable cv_getToken_;
-		mutable std::condition_variable cv_wait_;
+		std::mutex cv_mutex_;				
+		mutable std::condition_variable cv_getToken_;		
 	};
 }
