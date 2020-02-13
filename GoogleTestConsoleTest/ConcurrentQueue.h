@@ -63,6 +63,5 @@ namespace XYZCore
 		std::queue<T> queue_;
 		std::mutex mutex_;
 		std::condition_variable cond_;
-		const int popTimeout_ = 1;
 	};
 }
