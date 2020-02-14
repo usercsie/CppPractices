@@ -18,37 +18,12 @@ namespace XYZCore
 			resource_{ resource },
 			done_{ false }
 		{
-			for (int n = 0; n < threadNum; n++)
-			{				
-				worker_.push_back
-				(
-					std::thread([this, n]()
-					{
-						while (!done_)
-						{											
-							queue_.pop()();							
-							//std::cout << "pop." << std::this_thread::get_id() << "===>" << done_ << std::endl;
-						}
-					})
-				);
-			}
+			Start(threadNum);
 		}
 
 		~AsyncQueueThreads()
 		{			
-			for (int n = 0; n < worker_.size(); n++)
-			{
-				queue_.push([this] {done_ = true; });
-			}
-			
-			for (auto& w : worker_)
-			{
-				if (w.joinable() == true)
-				{
-					w.join();
-					std::cout << "Thread terminated." << std::endl;
-				}
-			}			
+			Stop();
 		}
 
 		template <typename F>
@@ -105,9 +80,35 @@ namespace XYZCore
 					if (duration > timeOut)
 						return false;
 				}					
-			}
+			}			
 
-			//想不出其它方法, 只能先用Join的方式來判斷是否結束
+			//Not a good idea...
+			Restart();
+
+			return true;
+		}
+
+	private:
+		void Start(int num)
+		{
+			for (int n = 0; n < num; n++)
+			{
+				worker_.push_back
+				(
+					std::thread([this, n]()
+				{
+					while (!done_)
+					{
+						queue_.pop()();
+						//std::cout << "pop." << std::this_thread::get_id() << "===>" << done_ << std::endl;
+					}
+				})
+				);
+			}
+		}
+
+		void Stop()
+		{
 			for (int n = 0; n < worker_.size(); n++)
 			{
 				queue_.push([this] {done_ = true; });
@@ -115,10 +116,20 @@ namespace XYZCore
 
 			for (auto& w : worker_)
 			{
-				w.join();				
+				if (w.joinable() == true)
+				{
+					w.join();
+				}
 			}
 
-			return true;
+			worker_.clear();
+		}		
+
+		void Restart()
+		{
+			int num = worker_.size();
+			Stop();
+			Start(num);
 		}
 
 	private:

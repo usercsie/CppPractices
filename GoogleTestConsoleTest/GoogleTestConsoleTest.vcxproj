@@ -147,6 +147,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)googletest-master\googletest;$(SolutionDir)googletest-master\googletest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -169,6 +170,7 @@
     <ClCompile Include="PathOperTest.cpp" />
     <ClCompile Include="SharedPointerTest.cpp" />
     <ClCompile Include="StringOper.h" />
+    <ClCompile Include="StringOperTest.cpp" />
     <ClCompile Include="StringTest.cpp" />
     <ClCompile Include="TemplateTest.cpp" />
     <ClCompile Include="ThreadingTest.cpp" />
