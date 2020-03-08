@@ -163,7 +163,9 @@
     <ClCompile Include="DirectoryOperTest.cpp" />
     <ClCompile Include="FileOperTest.cpp" />
     <ClCompile Include="FileTest.cpp" />
+    <ClCompile Include="LambdaTest.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MoveTest.cpp" />
     <ClCompile Include="ObserverPatternImprovedTest.cpp" />
     <ClCompile Include="ObserverPatternTest.cpp" />
     <ClCompile Include="PathOperTest.cpp" />
@@ -172,6 +174,8 @@
     <ClCompile Include="StringTest.cpp" />
     <ClCompile Include="TemplateTest.cpp" />
     <ClCompile Include="ThreadingTest.cpp" />
+    <ClCompile Include="TypeCastingTest.cpp" />
+    <ClCompile Include="UniquePtrTest.cpp" />
     <ClCompile Include="VectorTest.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -180,7 +184,10 @@
     <ClInclude Include="ConcurrentQueue.h" />
     <ClInclude Include="DirectoryOper.h" />
     <ClInclude Include="FileOper.h" />
+    <ClInclude Include="MoveTest.h" />
     <ClInclude Include="PathOper.h" />
+    <ClInclude Include="TypeCastingTest.h" />
+    <ClInclude Include="UniquePtrTest.h" />
     <ClInclude Include="VectorOper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
