@@ -160,6 +160,7 @@
     <ClCompile Include="CallbackTest.cpp" />
     <ClCompile Include="ConcurrentQueueTest.cpp" />
     <ClCompile Include="ConcurrentTest.cpp" />
+    <ClCompile Include="cpplinqTest.cpp" />
     <ClCompile Include="DirectoryOperTest.cpp" />
     <ClCompile Include="FileOperTest.cpp" />
     <ClCompile Include="FileTest.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="AsyncQueueThreads.h" />
     <ClInclude Include="Concurrent.h" />
     <ClInclude Include="ConcurrentQueue.h" />
+    <ClInclude Include="cpplinq.hpp" />
     <ClInclude Include="DirectoryOper.h" />
     <ClInclude Include="FileOper.h" />
     <ClInclude Include="MoveTest.h" />

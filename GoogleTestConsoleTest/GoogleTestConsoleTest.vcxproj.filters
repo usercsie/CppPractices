@@ -78,6 +78,9 @@
     <ClCompile Include="MoveTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cpplinqTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileOper.h">
@@ -108,6 +111,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MoveTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cpplinq.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
